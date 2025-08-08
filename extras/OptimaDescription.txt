@@ -1,0 +1,7 @@
+Sam is an APL Developer at Optima Systems. He started at Optima in 2012 as an apprentice straight after finishing College. Sam decided to take Computing whilst studying at college, yet, he never intended to but, he thought it sounded interesting at the time. Sam’s original career plans involved studying Meteorology at university, to become a Meteorologist. His plans changed when he realised how much he enjoyed code.
+
+Since completing his apprenticeship, Sam has worked on a variety of projects, in various programming languages. During his apprenticeship Sam spent a few months in our network support department, but he decided that the line of work didn’t suit him.
+
+Today, Sam’s main focus within Optima is developing and maintaining a pensions system which is built in APL. During his time here, Sam has worked on some web-based developments using a variety of tools and languages. For example: Javascript and the Underscore.js library.
+
+Outside of work, Sam is an avid football fan and has travelled extensively to watch a variety of different leagues in this country and overseas. In addition, Sam enjoys playing video games and playing guitar.
