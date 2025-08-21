@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sam Gutsell - Programming Challenge: The Year Game</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../css/main.css">
+<style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+</style>
+</head>
+<body class="w3-light-grey">
+
+<!-- Page Container -->
+<div class="w3-content w3-margin-top" style="max-width:1400px;">
+
+  <!-- The Grid -->
+  <div class="w3-row-padding">
+  
+    <!-- Left Column -->
+    <div class="w3-third">
+      <div class="w3-white w3-text-grey w3-card-4">
+        <div class="w3-container">
+        <h4><a href="../index.html"><i class="fa fa-home"></i> Home</a></h4>
+        <hr>
+        <h4><a href="../posts.html"><i class="fa fa-pencil-square-o"></i> Posts I've written</a></h4>
+        </div>
+      </div><br>
+    <!-- End Left Column -->
+    </div>
+
+    <!-- Right Column -->
+    <div class="w3-twothird">
+      <div class="w3-container w3-card w3-white w3-margin-bottom">
+<div id="post-main">
+<h1>Programming Challenge: The Year Game</h1>
+<h5>January 13, 2021</h5>
+<p>Happy New Year! At the start of this year, I remembered a <a href="https://www.dyalog.com/2016-year-game.htm" target="_blank" rel="noopener noreferrer">challenge that Dyalog had come up with back in 2016</a> that was focused around the year 2016. So, I decided to see how I would get on trying the same challenge with the year 2021.</p>
+
+<h3>The challenge</h3>
+<p>The challenge is to write a series of expressions using the year (in this case 2021) to return each number from 0-100, meaning an expression per number. Each expression must contain the digits of the year in order and include no other digits. The digits from the year can be grouped together or separated using spaces, decimals or any functions or operators you wish to use, for example: 2021, 20+21, 2.021, 2 0 2 1.</p>
+<p>The original challenge was intended for users of APL, so the official Dyalog rules are specifically tailored to APL solutions, but do not let this put you off trying it in different languages. I would say the only thing that needs to be followed strictly for non-APL users is that the numbers are in order, numbers are only separated by spaces, decimals or any other function or operator, and that other digits are not included.</p>
+
+<h3>My expressions for 0 - 10</h3>
+<p>As I am an APL developer, I decided to tackle the challenge using APL. I will take you through my expressions to produce 0-10 with explanations of what they are doing.</p>
+
+<blockquote id="codeblock"><code>
+&nbsp;&nbsp;&nbsp;&nbsp;20=21
+<br>
+0
+</blockquote></code>
+
+<p>This is a straightforward logical evaluation, does 20 equal 21, the answer being no, returns a Boolean equivalent to no/false being 0.</p>
+
+<blockquote id="codeblock"><code>
+&nbsp;&nbsp;&nbsp;&nbsp;202⌊1
+<br>
+1
+</blockquote></code>
+
+<p>Using the symbol Downstile dyadically (with a left and right argument) means return the smallest of the 2 arguments, so the above expression means which is smaller between 202 and 1, so returns 1.</p>
+
+<blockquote id="codeblock"><code>
+&nbsp;&nbsp;&nbsp;&nbsp;2⌊021
+<br>
+2
+</blockquote></code>
+
+<p>Again, using the symbol Downstile dyadically, so the above expression means which is smaller between 2 and 021, so returns 2.</p>
+
+<blockquote id="codeblock"><code>
+&nbsp;&nbsp;&nbsp;&nbsp;20⌊2+1
+<br>
+3
+</blockquote></code>
+
+<p>Again, using the symbol Downstile dyadically, but this time we are also using a plus, so the above expression evaluates 2+1 first and then evaluates which is smaller between 20 and 3, so returns 3.</p>
+<p>The order of execution in APL, in its simplest form, is evaluate from right to left and evaluate parentheses first. More information on order of execution in APL can be found in one of my previous blogs.</p>
+
+<blockquote id="codeblock"><code>
+&nbsp;&nbsp;&nbsp;&nbsp;2+02⌈1
+<br>
+4
+</blockquote></code>
+
+<p>Using the symbol Upstile dyadically means return the largest of the 2 arguments, so the right-hand side of the above expression (<code> 02⌈1 </code>) means which is larger between 02 or 1, so returns 2. We are then left with the left-hand side of the expression (<code> 2+ </code>) along with the already evaluated right-hand side meaning we have <code>2+2</code>, which returns 4.</p>
+
+<blockquote id="codeblock"><code>
+&nbsp;&nbsp;&nbsp;&nbsp;2+02+1
+<br>
+5
+</blockquote></code>
+
+<p>In this expression we simply add everything together to get 5.</p>
+
+<blockquote id="codeblock"><code>
+&nbsp;&nbsp;&nbsp;&nbsp;2×02+1
+<br>
+6
+</blockquote></code>
+
+<p>Keeping in mind the order of execution in APL, we operate the right-hand side first (<code> 02+1 </code>) giving us 3, we are then left with <code>2×3</code> giving us 6.</p>
+
+<blockquote id="codeblock"><code>
+&nbsp;&nbsp;&nbsp;&nbsp;⌈20÷2+1
+<br>
+7
+</blockquote></code>
+
+Operating <code>2+1</code> first, gives us 3, then operating <code>20÷3</code>, gives us 6.666…, then applying Upstile monadically (only with a right argument) acts as round up to the next whole integer, so returns 7.
+
+<blockquote id="codeblock"><code>
+&nbsp;&nbsp;&nbsp;&nbsp;2*02+1
+<br>
+8
+</blockquote></code>
+
+Operating <code>02+1</code> first gives us 3, we then operate <code>2*3</code>, which means 2 to the power of 3, which gives us 8.
+
+<blockquote id="codeblock"><code>
+&nbsp;&nbsp;&nbsp;&nbsp;×⍨2⌈02+1
+<br>
+9
+</blockquote></code>
+
+<p>Again, operating <code>02+1</code> first gives us 3, then applying Upstile gives us the larger of 2 and 3, which is 3. We then use the operator commute with the function Times (<code> ×⍨ </code>) which means multiply the right argument by itself, so we are effectively operating <code>3×3</code> so we get 9.</p>
+
+<blockquote id="codeblock"><code>
+&nbsp;&nbsp;&nbsp;&nbsp;20÷2⌈1
+<br>
+10
+</blockquote></code>
+
+<p>Using Upstile, we find the greater of 2 and 1, which gives 2, we then do <code>20÷2</code>, which returns 10.</p>
+
+<h3>How many can you get?</h3>
+<p>Now I have gone through my first set of expressions, why not see how many of the 0-100 you can get and in what languages, please let me know in the comments. Also, for any APLers out there that can see alternatives or improvements to my expressions, please let me know.</p>
+
+
+
+
+</div>
+    <!-- End Right Column -->
+    </div>
+  <!-- End Grid -->
+  </div>
+  <!-- End Page Container -->
+</div>
+
+<footer class="w3-container w3-teal w3-center w3-margin-top">
+  <a id="icon" href="https://github.com/samgutsell" target="_blank" rel="noopener noreferrer"><i class="fa fa-github-square"></i></a>
+  <a id="icon" href="https://www.linkedin.com/in/samgutsell/" target="_blank" rel="noopener noreferrer"><i class="fa fa-linkedin-square"></i></a>
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" rel="noopener noreferrer">w3.css</a></p>
+</footer>
+
+</body>

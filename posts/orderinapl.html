@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sam Gutsell - Order of Execution in APL Programming</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../css/main.css">
+<style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+</style>
+</head>
+<body class="w3-light-grey">
+
+<!-- Page Container -->
+<div class="w3-content w3-margin-top" style="max-width:1400px;">
+
+  <!-- The Grid -->
+  <div class="w3-row-padding">
+  
+    <!-- Left Column -->
+    <div class="w3-third">
+      <div class="w3-white w3-text-grey w3-card-4">
+        <div class="w3-container">
+        <h4><a href="../index.html"><i class="fa fa-home"></i> Home</a></h4>
+        <hr>
+        <h4><a href="../posts.html"><i class="fa fa-pencil-square-o"></i> Posts I've written</a></h4>
+        </div>
+      </div><br>
+    <!-- End Left Column -->
+    </div>
+
+    <!-- Right Column -->
+    <div class="w3-twothird">
+      <div class="w3-container w3-card w3-white w3-margin-bottom">
+<div id="post-main">
+<h1>Order of Execution in APL Programming</h1>
+<h5>June 6, 2019</h5>
+
+<p>APL began life as a mathematical notation, created by the Canadian computer scientist Kenneth E. Iverson. Over the years it evolved into the APL programming language. There are several versions of APL but they <a href="https://en.wikipedia.org/wiki/APL_syntax_and_symbols#Syntax_rules" target="_blank" rel="noopener noreferrer"> all follow the same order of operations</a>.</p>
+<p>When I started learning APL, one of the trickiest things was reprogramming my brain! This was because APL does not follow a traditional mathematical order of execution. The special symbols do take some getting used to but trying to change the way you think is much trickier.</p>
+<h3>BODMAS/BIDMAS vs APL</h3>
+<p>In traditional mathematics, the correct order of execution is BODMAS. This is also sometimes referred to as BIDMAS, where the only difference is I, which stands for indices. BODMAS stands for: brackets, orders, division, multiplication, addition and subtraction. When evaluating mathematical expressions, you would work from left to right using BODMAS. First resolving brackets, then orders, and so on.</p>
+<p>In contrast to BODMAS, APL evaluates mathematical expressions from right to left unless the order of execution is modified by parentheses. Next, I will show the differences.</p>
+<h3>Some Examples</h3>
+<p>To demonstrate, we will look at the following expression: 10 × 5 + 5</p>
+<p>As you can see, we have both multiplication and addition. So, given the order of BODMAS, we know the multiplication will be resolved first, then the addition. Meaning 10 × 5 will be resolved first, then will be added to 5, giving us 55.</p>
+<p>However, in APL, the above expression would perform differently. It would be executed as follows: 5 + 5 would be resolved first, then multiplied by 10, giving us 100.</p>
+<p>Another example of this would be the expression (10 × 20 - 5) ÷ 15.</p>
+<p>In traditional mathematics, the brackets would be resolved first also using BODMAS. This means we would perform 10 × 20 giving us 200, then subtract 5 leaving us with 195. We then resolve 195 ÷ 15, giving us 13.</p>
+<p>In APL, we would still resolve the brackets first, but this will result in a different answer. 20 - 5 gives us 15, then multiplying that by ten gives us 150. Finally, then we resolve 150 ÷ 15, giving us 10.</p>
+<h3>Conclusion</h3>
+<p>The above examples aren't very complex, unlike some real-world application of mathematics.</p>
+<p>For example, we build and maintain a system containing pension calculations. So, when we receive specifications for calculations, we must be aware of the order of execution. This, of course, has an impact on how much time some projects may take us. When we are working with actuaries to refine calculations this can prove difficult.</p>
+<p>This is because actuaries define the calculations using a traditional mathematical approach. The same issue occurs internally when our QA is trying to test our calculations. Thankfully, our QA is much more forgiving.</p>
+
+</div>
+    <!-- End Right Column -->
+    </div>
+  <!-- End Grid -->
+  </div>
+  <!-- End Page Container -->
+</div>
+
+<footer class="w3-container w3-teal w3-center w3-margin-top">
+  <a id="icon" href="https://github.com/samgutsell" target="_blank" rel="noopener noreferrer"><i class="fa fa-github-square"></i></a>
+  <a id="icon" href="https://www.linkedin.com/in/samgutsell/" target="_blank" rel="noopener noreferrer"><i class="fa fa-linkedin-square"></i></a>
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" rel="noopener noreferrer">w3.css</a></p>
+</footer>
+
+</body>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sam Gutsell - Creating a Graphical User Interface (GUI) in Dyalog APL (Part 1)</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../css/main.css">
+<style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+</style>
+</head>
+<body class="w3-light-grey">
+
+<!-- Page Container -->
+<div class="w3-content w3-margin-top" style="max-width:1400px;">
+
+  <!-- The Grid -->
+  <div class="w3-row-padding">
+  
+    <!-- Left Column -->
+    <div class="w3-third">
+      <div class="w3-white w3-text-grey w3-card-4">
+        <div class="w3-container">
+        <h4><a href="../index.html"><i class="fa fa-home"></i> Home</a></h4>
+        <hr>
+        <h4><a href="../posts.html"><i class="fa fa-pencil-square-o"></i> Posts I've written</a></h4>
+        </div>
+      </div><br>
+    <!-- End Left Column -->
+    </div>
+
+    <!-- Right Column -->
+    <div class="w3-twothird">
+      <div class="w3-container w3-card w3-white w3-margin-bottom">
+<div id="post-main">
+<h1>Creating a Graphical User Interface (GUI) in Dyalog APL (Part 1)</h1>
+<h5>May 28, 2021</h5>
+
+<p>One of the most important things about an application is the Graphical User Interface (GUI for short) as this is how users interact with your app. This is why, over a series of posts, I am going to show you how to build a basic GUI in Dyalog APL.</p>
+
+<h3>Create a blank form</h3>
+<p>In this post I will be using <code>⎕WC</code> to build a GUI, however, there are alternatives and I will mention these in the last part of this series.</p>
+
+<p>To start with we need a blank form, an empty window where we can later add other GUI objects. To do this we need to run:</p>
+
+<blockquote id="codeblock"><code>
+'F'⎕WC'Form'
+</code></blockquote>
+
+<p>This will give you a basic default empty form with the name <code>'F'</code>.</p>
+<img src="../images/gui-1.jpg">
+<p>As I previously said this is a default, empty form, however we can set and adjust properties of the form to make it suit our needs, so let's change the size and caption (the title). The GUI properties can be accessed in the same way we would access the contents of a namespace, using dot notation. We can see what the current size of our form is by running <code>F.Size</code> in the session, as this is a default form this should return <code>50 50</code>. By default, the size and position properties of GUI objects are defined as a percentage of the size of the parent object, as this is a form object with no other objects defined by us as a parent it uses a percentage of your screen size.</p>
+
+<h3>Changing the size of the screen</h3>
+<p>To change the size of the screen we can treat <code>F.Size</code> as a variable which means we can overwrite the value with a simple assignment. Let’s change it to 20% by 20% by running:</p>
+
+<blockquote id="codeblock"><code>
+F.Size←20 20
+</code></blockquote>
+
+<img src="../images/gui-2.jpg">
+<h3>Change the caption property</h3>
+<p>We can also change the caption property by doing an assignment too, lets change it to ‘My first form’ by running:</p>
+
+<blockquote id="codeblock"><code>
+F.Caption←'My first form'
+</code></blockquote>
+
+<img src="../images/gui-3.jpg">
+
+<p>Another way of setting these properties is by defining them when we initialise the form by listing the name-value pairs in brackets after the initial form definition. When using this approach be sure to quote the property name and reflect the correct data format of the value. We can define our form with the caption and size properties by running:</p>
+
+<blockquote id="codeblock"><code>
+'F'⎕WC'Form'('Caption' 'My first form')('Size' 20 20)
+</code></blockquote>
+
+<img src="../images/gui-4.jpg">
+<p>One thing to note about defining a form with the same name as one that already exists is that the new one will replace the existing one. This means if you were to define a form called F and run another line that also creates a form called F, the original would be replaced if they are contained in the same namespace.</p>
+<h3>What next?</h3>
+<p>In my next post, we will be adding some interactive objects to the form and investigating how we can configure these to suit our needs. If you have any questions about anything I have covered, please leave a comment and I will do my best to answer it.</p>
+
+</div>
+    <!-- End Right Column -->
+    </div>
+  <!-- End Grid -->
+  </div>
+  <!-- End Page Container -->
+</div>
+
+<footer class="w3-container w3-teal w3-center w3-margin-top">
+  <a id="icon" href="https://github.com/samgutsell" target="_blank" rel="noopener noreferrer"><i class="fa fa-github-square"></i></a>
+  <a id="icon" href="https://www.linkedin.com/in/samgutsell/" target="_blank" rel="noopener noreferrer"><i class="fa fa-linkedin-square"></i></a>
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" rel="noopener noreferrer">w3.css</a></p>
+</footer>
+
+</body>

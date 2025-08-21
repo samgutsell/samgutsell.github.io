@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sam Gutsell - Checking for Palindromes in APL, Python and other Programming Languages</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../css/main.css">
+<style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+</style>
+</head>
+<body class="w3-light-grey">
+
+<!-- Page Container -->
+<div class="w3-content w3-margin-top" style="max-width:1400px;">
+
+  <!-- The Grid -->
+  <div class="w3-row-padding">
+  
+    <!-- Left Column -->
+    <div class="w3-third">
+      <div class="w3-white w3-text-grey w3-card-4">
+        <div class="w3-container">
+        <h4><a href="../index.html"><i class="fa fa-home"></i> Home</a></h4>
+        <hr>
+        <h4><a href="../posts.html"><i class="fa fa-pencil-square-o"></i> Posts I've written</a></h4>
+        </div>
+      </div><br>
+    <!-- End Left Column -->
+    </div>
+
+    <!-- Right Column -->
+    <div class="w3-twothird">
+      <div class="w3-container w3-card w3-white w3-margin-bottom">
+<div id="post-main">
+<h1>Checking for Palindromes in APL, Python and other Programming Languages</h1>
+<h5>February 24, 2020</h5>
+
+<p>Recently we had a special date on the calendar, that some of you may have noticed. The date in question is February 2nd 2020, which when written in any of these formats: <b>DD/MM/YYYY (UK)</b>, <b>MM/DD/YYYY (US)</b> or <b>YYYYMMDD (ISO)</b>, is in fact a palindrome (excluding ‘/’ or other symbols). This made me think about how I could check for palindromes using APL.</p>
+<h3>What is a palindrome?</h3>
+<p>When approaching this problem, the first question is what is the definition of a palindrome? A palindrome is something that can be read the same backwards as it is forwards, for example: racecar, 1001, was it a rat I saw? (excluding symbols and spaces) and the reason I’m writing about palindromes, <b>02/02/2020</b>.</p>
+
+<!--make this a highlighted block-->
+<div id="block-highlight">
+  <h3>Fun fact</h3>
+  <p>The last time we saw a date that is palindromic in UK, US and ISO formats, before <b>02/02/2020</b> was 909 years ago, <b>11/11/1111</b>. We now won’t see another one for 101 years, <b>12/12/2121</b>.</p>
+</div>
+
+<hr>
+
+<h3>Investigating the problem in APL</h3>
+<h4>Input format</h4>
+<p>I have decided that the input should be in ISO format; this means February 2nd 2020 in this format would be 20200202 which is YYYYMMDD. So, with this and the definition of a palindrome in mind, I know my first task, reverse the input of the function. Luckily, in APL, we have a symbol which will reverse anything that you pass it, the symbol is called Circle Stile <code>⌽</code> and when called with only a right argument performs reverse. For example: <code>⌽'rats'</code> returns <code>'star'</code>.</p>
+<h4>Checking the input against the reversed input</h4>
+<p>Now we have the normal input and the reversed input we need to compare the two. We can compare them using the symbol Equals Underbar <code>≡</code> which performs a match operation on two items. For example: <code>'rats'≡'rats'</code> returns 1 which means true, because they match, and <code>'rats'≡'star'</code> returns 0 which means false, because they don’t match.</p>
+<p>Let’s say the input is called <code>num</code> if we write an expression to evaluate if the input is the same forward as it is backwards we can write it like this: <code>num≡⌽num</code>, however this will only work if the variable <code>num</code> is a text string.</p>
+<h4>User interaction</h4>
+<p>When we come to write a function to solve the issue we will need to incorporate user input. We can use Quad <code>⎕</code> and Quote Quad <code>⍞</code> to ask the user for a number and retrieve that number as text. <code>⎕←'Enter any number: '</code> will output to the user saying 'Enter any number: ', the user would then type in their response and we can capture that using <code>⍞</code> which captures their input as text.</p>
+<h4>Putting it all together</h4>
+<p>We then need to evaluate their input to check to see if they have entered a palindromic number. To achieve this, we can use the expression I already detailed previously <code>num≡⌽num</code>. However, there is another way of writing this same expression using a function train, <code>(⌽≡⊢)</code>. You would use this expression like this: <code>(⌽≡⊢)num</code>, which when broken down simply means <code>(⌽num)≡(⊢num)</code>. This is because we apply the left and right symbols in the bracket to <code>num</code> the left hand one I’ve detailed above and the right hand one, Right Tack <code>⊢</code>, means use the right argument, and in this case, we only have a right argument. We then say result of left symbol <code>≡</code> (match) result of right symbol, therefore this is reversed num match num.</p>
+
+<hr>
+
+<h3>My solution for checking for palindromes in APL</h3>
+<p>In APL we have a couple of ways of defining a function, traditional functions and direct functions, my solution can be implemented as either one of these.</p>
+
+<p>As a Traditional function:</p>
+
+<blockquote id="codeblock"><code>
+∇r←palindrome_trad;num
+<br>
+⎕←'Enter any number: '
+<br>
+num←⍞
+<br>
+:If (⌽≡⊢)num
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;r←'Given number is a palindromic number'
+<br>
+:Else
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;r←'Given number is not a palindromic number'
+<br>
+:EndIf
+<br>
+∇
+</code></blockquote>
+
+<p>As a Direct function:</p>
+
+<blockquote id="codeblock"><code>
+Palindrome_dfn←{
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;⎕←'Enter any number: '
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;num←⍞
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(⌽≡⊢)num:'Given number is a palindromic number'
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;'Given number is not a palindromic number'
+<br>
+}
+</code></blockquote>
+
+<hr>
+
+<h3>The solutions in other languages</h3>
+<p>After solving the problem for myself in APL I was curious to see how the same thing could be achieved in other languages. I decided to search the web for solutions in C, Java and Python.</p>
+
+<h4>Checking for palindromes in C</h4>
+<p>This is how to check whether a given number is a palindrome in C:</p>
+<p>I found <a href="https://www.w3schools.in/c-program/c-program-to-check-whether-the-given-number-is-a-palindromic/"  target="_blank" rel="noopener noreferrer">the C Solution here</a>.</p>
+<blockquote id="codeblock"><code>
+#include
+<br>
+int main() {
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;int n, n1, rev = 0, rem;
+<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;printf("Enter any number: ");
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;scanf("%d", &n);
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n1 = n;
+<br>
+<br>   
+&nbsp;&nbsp;&nbsp;&nbsp;/* logic */    while (n > 0){
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rem = n % 10;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rev = rev * 10 + rem;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n = n / 10;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if (n1 == rev){
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("Given number is a palindromic number"); 
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;else{
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("Given number is not a palindromic number"); 
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}    
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return 0; 
+<br>
+}
+</code></blockquote>
+
+<hr>
+
+<h4>Checking for palindromes in Java</h4>
+<p>This is how to check whether a given number is a palindrome in Java:</p>
+<p>I found <a href="https://www.w3resource.com/java-exercises/numbers/java-number-exercise-24.php"  target="_blank" rel="noopener noreferrer">the Java Solution here</a>, I amended this slightly from the source material to match the input request and function output.</p>
+<blockquote id="codeblock"><code>
+import java.util.Scanner;
+<br>
+public class Example24  {
+<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;public static void main(String args[])
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Scanner in = new Scanner(System.in);
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.print("Enter any number: ");
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int n = in.nextInt();
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int sum = 0, r;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int temp = n;    
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while(n>0)
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{    
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;r = n % 10;   
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sum = (sum*10)+r;    
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n = n/10;    
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}    
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(temp==sum)    
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Given number is a palindromic number");    
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else    
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Given number is not a palindromic number");    
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}  
+<br>
+}
+</code></blockquote>
+
+<hr>
+
+<h4>Checking for palindromes in Python</h4>
+<p>This is how to check whether a given number is a palindrome in Python: I found <a href="https://www.sanfoundry.com/python-program-check-number-palindrome/"  target="_blank" rel="noopener noreferrer">the Python Solution here</a> (I amended this slightly from the source material to match the input request and function output).</p>
+
+<blockquote id="codeblock"><code>
+n=int(input("Enter any number: "))
+<br>
+temp=n
+<br>
+rev=0
+<br>
+while(n>0):
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dig=n%10
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rev=rev*10+dig
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n=n//10
+<br>
+if(temp==rev):
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("Given number is a palindromic number")
+<br>
+else:
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("Given number is not a palindromic number")
+</code></blockquote>
+
+<p>After seeing the other solutions, I can only see two real similarities between my solution and the others: the way we retrieve the input and the control structure at the end to return the result. A similarity between the other solutions is that they are all using the same mathematical approach. When I coded my solution I wasn’t aware of this mathematical approach, so I used a couple of built in operations instead: using <code>⍞</code> to retrieve text from the user without the user having to specify the number as a string and using <code>⌽</code> to reverse the input to make the comparison easier.</p>
+
+<hr>
+
+<h3>Implementing this mathmatical approach in APL</h3>
+<p>I wanted to see how those solutions were operating so I decided to translate the mathematical approach into an APL solution too (based mainly on the python solution shown above).</p>
+
+<blockquote id="codeblock"><code>
+palindrome;dig;rev;temp;n
+<br>
+⎕←'Enter any number: '
+<br>
+n←⎕
+<br>
+temp←n
+<br>
+rev←0
+<br>
+:While n>0
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dig←10|n
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rev←dig+rev×10
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n←⌊n÷10
+<br>
+:EndWhile
+<br>
+<br>
+:If temp=rev
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⎕←'Given number is a palindromic number'
+<br>
+:Else
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⎕←'Given number is not palindromic number'
+<br>
+:EndIf
+</code></blockquote>
+
+<hr>
+
+<h3>Anymore?</h3>
+<p>I’d love to see if any readers can come up with other solutions (perhaps even in other languages). If you send them to info@optima-systems.co.uk we will post them below this articles (or use the comments section below).</p>
+
+<hr>
+
+
+<h3>Responses</h3>
+<div id="block-highlight">
+<h4>Peter Merritt, Senior APL Consultant at Optima Systems</h4>
+<p>Taken from comments section below.</p>
+
+<p>Thanks Sam. How about this for generating a list of all palindrome dates (0-9999 AD):</p>
+<blockquote id="codeblock"><code>
+r←PalindromeDates;dd;mm;xx;yy;zz;mmdd;dates
+<br>
+⍝ return a list of possible dates in CCYYMMDD format which could be palindromes
+<br>
+dd←{↓'ZI2'⎕FMT⍳⍵}¨31 29 31 30 31 30 31 31 30 31 30 31
+<br>
+⍝ get formatted vector of days in months
+<br>
+mm←↓'ZI2'⎕FMT⍳12
+<br>
+⍝ get a formatted vector of months in year
+<br>
+yy←∪,↑(⊂mm){,⍺∘.,⍵}¨dd
+<br>
+⍝ append each to each for unique list of legit month:days pairs
+<br>
+mmdd←(∊{~0∊⍴⍵~' '}¨yy)/yy
+<br>
+⍝ remove empty elements
+<br>
+dates←(⌽¨mmdd),¨mmdd
+<br>
+⍝ reverse each month/day set to form year, prefix to month/day pairs
+<br>
+r←dates[⎕AV⍋(↑dates)]
+<br>
+⍝ sort into ascending date order
+<br>
+<br>
+⍝ TO DO:
+<br>
+⍝ - remove non-legitimate leap years
+<br>
+⍝ - extend beyond year 9999
+</code></blockquote>
+<br>
+</div>
+<br>
+<div id="block-highlight">
+<h4>James Heslip, APL Team Leader at Optima Systems</h4>
+<p>Taken from comments section below.</p>
+<p>Great article Sam. The APL solution you post works great for text input:</p>
+
+<blockquote id="codeblock"><code>
+(⌽≡⊢)'101'
+<br>
+1
+</code></blockquote>
+
+<p>But for numeric input it falls short and (incorrectly) says everything is a palindrome:</p>
+<blockquote id="codeblock"><code>
+(⌽≡⊢)123
+<br>
+1
+</code></blockquote>
+<p>You've avoided this issue in this article with the use of Quote Quad <code>⍞</code> converting the data type to text, and then checking it. If you want to avoid the conversion, you can use the following in APL:</p>
+
+<blockquote id="codeblock"><code>
+(⌽≡⊢)10⊥⍣¯1⊢123
+<br>
+0
+<br>
+<br>
+(⌽≡⊢)10⊥⍣¯1⊢101
+<br>
+1
+</code></blockquote>
+
+<p>Essentially we're using a change of base to split the number from a scalar out into individual digits:</p>
+
+<blockquote id="codeblock"><code>
+10⊥⍣¯1⊢123
+<br>
+1 2 3
+</code></blockquote>
+
+<p>This is equivalent to (but using scalar extension in our favour):</p>
+
+<blockquote id="codeblock"><code>
+10 10 10⊤123
+<br>
+1 2 3
+</code></blockquote>
+
+<p>When we have a vector, we can then rotate it and compare correctly. The rotation of a scalar is the scalar itself, hence why the initial method doesn't work for numerics.</p>
+<br>
+</div>
+<br>
+<div id="block-highlight">
+<h4>Adám Brudzewsky, Computer Programmer at Dyalog Ltd</h4>
+<p>Taken from comments section below.</p>
+
+<p>How about going <a href="https://stackoverflow.com/questions/11227809/why-is-processing-a-sorted-array-faster-than-processing-an-unsorted-array/11227902#11227902" target="_blank" rel="noopener noreferrer">branchless?</a></p>
+<blockquote id="codeblock"><code>
+Palindrome_branchless←{
+<br>
+&nbsp;&nbsp;⎕←'Enter any number:'
+<br>
+&nbsp;&nbsp;num←⍞
+<br>
+&nbsp;&nbsp;yes←'Given number is a palindromic number'
+<br>
+&nbsp;&nbsp;no←'Given number is not a palindromic number'
+<br>
+&nbsp;&nbsp;⊃no yes⌽⍨(⌽≡⊢)num
+<br>
+}
+</code></blockquote>
+<br>
+</div>
+
+</div>
+    <!-- End Right Column -->
+    </div>
+  <!-- End Grid -->
+  </div>
+  <!-- End Page Container -->
+</div>
+
+<footer class="w3-container w3-teal w3-center w3-margin-top">
+  <a id="icon" href="https://github.com/samgutsell" target="_blank" rel="noopener noreferrer"><i class="fa fa-github-square"></i></a>
+  <a id="icon" href="https://www.linkedin.com/in/samgutsell/" target="_blank" rel="noopener noreferrer"><i class="fa fa-linkedin-square"></i></a>
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" rel="noopener noreferrer">w3.css</a></p>
+</footer>
+
+</body>

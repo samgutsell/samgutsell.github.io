@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sam Gutsell - Using a MIDI Controller With Dyalog APL</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../css/main.css">
+<style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+</style>
+</head>
+<body class="w3-light-grey">
+
+<!-- Page Container -->
+<div class="w3-content w3-margin-top" style="max-width:1400px;">
+
+  <!-- The Grid -->
+  <div class="w3-row-padding">
+  
+    <!-- Left Column -->
+    <div class="w3-third">
+      <div class="w3-white w3-text-grey w3-card-4">
+        <div class="w3-container">
+        <h4><a href="../index.html"><i class="fa fa-home"></i> Home</a></h4>
+        <hr>
+        <h4><a href="../posts.html"><i class="fa fa-pencil-square-o"></i> Posts I've written</a></h4>
+        </div>
+      </div><br>
+    <!-- End Left Column -->
+    </div>
+
+    <!-- Right Column -->
+    <div class="w3-twothird">
+      <div class="w3-container w3-card w3-white w3-margin-bottom">
+<div id="post-main">
+<h1>Using a MIDI Controller With Dyalog APL</h1>
+<h5>May 12, 2020</h5>
+
+
+<p>As well as being a programmer, I am a hobbyist musician. At school and in my spare time I have studied music production and music theory. I occasionally write pieces of music and I recently received a MIDI controller as a gift. Being a programmer one of my initial thoughts was ‘how can I code an interface to this device?’, so I began my investigation.</p>
+<h3>Interfacing with MIDI in Windows</h3>
+<p>I started to investigate MIDI interfacing in APL, by looking for examples in other languages. I found examples in C#, so attempted to imitate the behaviour in APL, but to no avail.</p>
+<p>After some more research, I found out that the C# example is using the UWP (Universal Windows Platform) interfacing library which, to my knowledge, is not accessible by default from Dyalog. I attempted to access the correct DLLs in Dyalog, but didn’t manage to get the connection working.</p>
+<p>I then read up more on the UWP interface and found that this is used for Windows store and Xbox applications, and couldn’t find any reference to it being used outside of those environments.</p>
+<h3>Has it been done before?</h3>
+<p>After having spent some time trying to build an interface from scratch, I searched for MIDI interfacing in Dyalog APL and was surprised by what I found. My first discovery was a Vector article which was a Minnowbrook summary, but it only mentioned <a href="http://archive.vector.org.uk/art10501310" target="_blank" rel="noopener noreferrer">Stanley Jordan and his work with MIDI in passing</a>. My second discovery was another Vector article, this time it had more detail.</p>
+<p>The <a href="http://archive.vector.org.uk/trad/v183/ray183.pdf" target="_blank" rel="noopener noreferrer">second article</a> was written by Ray Cannon (who used to work for Optima!) and had some code examples. Ray’s work was inspired by <a href="http://archive.vector.org.uk/art10006150" target="_blank" rel="noopener noreferrer">Martin Neitzel’s article about MIDI interfacing in J</a>, which also appeared in Vector. As a test I tried the methods manually and they worked, great, but then I realised the article is a scanned document, meaning no copy and paste. So, I started typing the first function out and then thought there must be an easier way. I did a quick Google and found an OCR (Optical character recognition) software online, which worked reasonably well, but would require a lot of work to rectify completely, it wasn’t recognising APL symbols, as they are non-standard Unicode characters. In doing this, I then saw the article mentioned a resource page on the Vector website. Given the article was from a January 2002 edition of Vector, I wasn’t holding my breath.</p>
+<p>To my surprise, the resource associated with Ray’s article is still live, but the workspace was built in version 9 of Dyalog.</p>
+<h3>Reviving Ray’s workspace</h3>
+<p>I quickly found that you can’t open a Dyalog 9 workspace in Dyalog 16, my initial reaction was 'what is the earliest version available on Dyalog’s website?'. The oldest version readily available was Dyalog 13.1, so I chanced my arm and installed 13.1. I then tried loading the workspace and lo and behold it worked. This allowed me to save the workspace as a 13.1 workspace and then copy that into a Dyalog 16 workspace, ready for me to begin testing old code and writing new code.</p>
+<h3>Windows 10 issues and further complication</h3>
+<p>As I began my full testing of the methods from Ray’s workspace, I encountered some issues. The old code didn’t recognise my device correctly, as the name seemed to be a random set of characters, unrecognisable to the conditions laid out in the code. I forced the code to bypass the checks and test it as a specific MIDI device with input and output. The first test was for the output, as soon as I started testing, I realised that the MIDI controller wasn't receiving messages, however, it was able to send messages in other applications. I then did a bit of Googling and found that there's a fundamental flaw with Windows 10 and MIDI devices.</p>
+<p>In Windows 10, the accepted range of addresses for MIDI devices is midi0 to midi9, but it offers up midi0 to midi19, my device was in midi10, meaning it was being ignored by Windows. I then tried uninstalling all MIDI drivers and following the installation guide for my MIDI controller once again, but it still installed into the midi10 address. My MIDI controller shows up as a device but is now not seen as a MIDI device by Windows 10. I attempted following some manufacturer guidelines to install a new driver, but I got to the point of selecting a new driver and Windows complained that there was missing information associated with the driver. This has, unfortunately, put a stop to my project for now as I have no other MIDI devices to test with.</p>
+<h3>What's the future of this project?</h3>
+<p>I am keen to continue the project and am eager to find out what I can achieve with a MIDI controller and an APL interface. I am in the process of getting a different MIDI controller, as after following the installation guide I now can’t use the one I had with any application, in any capacity.</p>
+
+</div>
+    <!-- End Right Column -->
+    </div>
+  <!-- End Grid -->
+  </div>
+  <!-- End Page Container -->
+</div>
+
+<footer class="w3-container w3-teal w3-center w3-margin-top">
+  <a id="icon" href="https://github.com/samgutsell" target="_blank" rel="noopener noreferrer"><i class="fa fa-github-square"></i></a>
+  <a id="icon" href="https://www.linkedin.com/in/samgutsell/" target="_blank" rel="noopener noreferrer"><i class="fa fa-linkedin-square"></i></a>
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" rel="noopener noreferrer">w3.css</a></p>
+</footer>
+
+</body>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sam Gutsell - Counting cards in APL</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../css/main.css">
+<style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+</style>
+</head>
+<body class="w3-light-grey">
+
+<!-- Page Container -->
+<div class="w3-content w3-margin-top" style="max-width:1400px;">
+
+  <!-- The Grid -->
+  <div class="w3-row-padding">
+  
+    <!-- Left Column -->
+    <div class="w3-third">
+      <div class="w3-white w3-text-grey w3-card-4">
+        <div class="w3-container">
+        <h4><a href="../index.html"><i class="fa fa-home"></i> Home</a></h4>
+        <hr>
+        <h4><a href="../posts.html"><i class="fa fa-pencil-square-o"></i> Posts I've written</a></h4>
+        </div>
+      </div><br>
+    <!-- End Left Column -->
+    </div>
+
+    <!-- Right Column -->
+    <div class="w3-twothird">
+      <div class="w3-container w3-card w3-white w3-margin-bottom">
+<div id="post-main">
+<h1>Counting cards in APL</h1>
+<h5>February 23, 2016 - Optima Systems Limited</h5>
+<p>When I first started APL in August 2012, I was pointed in the direction of the annual International APL Problem Solving Competition run by
+    <a href="http://www.dyalog.com/" target="_blank" rel="noopener noreferrer">Dyalog</a>.
+    I used it as method to practice what I had learnt. While I looked at the problems I saw one based on the poker game Texas hold ’em. It revolved around calculating the value of a hand with a series of tasks about calculating stats and determining best hands in different circumstances. I decided to take a step back and look at dealing with a deck of cards.</p>
+<h3>The Task</h3>
+<p>The first thing to do was initialise a deck of cards. So I set the card values and the suits:</p>
+<blockquote id="codeblock">
+    <code>CardValues←'2' '3' '4' '5' '6' '7' '8' '9' '10' 'J' 'Q' 'K' 'A'</code>
+    <br>
+    <code>Suits←'H' 'D' 'S' 'C'</code>
+</code></blockquote>
+<p>
+    I then needed to combine the two in a way that would give me a full suit of each (a full set of card values for each suit).
+    Using the catenate function <code>(,)</code> we can join arrays together (e.g <code>‘a’,’b’</code> returns <code>ab</code>).
+    When used with outer product <code>(∘.)</code> like this <code>∘.,</code> it will catenate each possible combination of two vectors.
+</p>
+<p>
+    The comma symbol, when used monadically (meaning with only the right argument) means ravel, which flattens complex structures into a vector (i.e if <code>table</code> is a 2 by 2 matrix of the numbers 1-4, then using ravel on it like this <code>,table</code> gives us <code>1 2 3 4</code> a flattened version of <code>table</code>).
+</p>
+<p>Putting this all together gives us:</p>
+<blockquote id="codeblock">
+    <code>Deck←,CardValues∘.,Suits</code>
+</blockquote>
+<p>
+    <code>Deck</code> is then a flat vector of 52 items, each of which is a different card. Now we have all the available cards from a standard 52 card deck.
+    I am also using reshape (<code>⍴</code>) to display the contents of the variable <code>Deck</code> in a 13 row by 4 column matrix to make it more readable.
+</p>
+<blockquote id="codeblock"><code>
+    &nbsp;&nbsp;&nbsp;&nbsp;13 4⍴Deck
+    <br>
+    2H    2D    2S    2C
+    <br>
+    3H    3D    3S    3C
+    <br>
+    4H    4D    4S    4C
+    <br>
+    5H    5D    5S    5C
+    <br>
+    6H    6D    6S    6C
+    <br>
+    7H    7D    7S    7C
+    <br>
+    8H    8D    8S    8C
+    <br>
+    9H    9D    9S    9C
+    <br>
+    10H   10D   10S   10C
+    <br>
+    JH    JD    JS    JC
+    <br>
+    QH    QD    QS    QC
+    <br>
+    KH    KD    KS    KC
+    <br>
+    AH    AD    AS    AC
+</code></blockquote>
+<p>The rho (<code>⍴</code>) symbol when used dyadically (meaning with two arguments; a left and a right argument) as above will reshape an array (right argument) by the dimensions (left argument).</p>
+<p>
+To then deal a hand of cards from the <code>Deck</code> I used the query symbol (<code>?</code>) which when used dyadically means deal. Deal picks a random selection of numbers from 1 to the number specified as the right argument (i.e <code>1?10</code> returns 1 random number between 1 and 10).
+Using the deal function (<code>?</code>) against the length of the <code>Deck</code> (<code>⍴Deck</code> this returns the shape/length of the right argument when used monadically) then using the result to index (<code>[x]</code> i.e <code>'abcdef'[3]</code> returns <code>c</code>) into the <code>Deck</code> and assign (<code>←</code> assign right argument into left argument) the result into the variable <code>Hand</code>.
+</p>
+<blockquote id="codeblock"><code>
+    Hand←Deck[2?⍴Deck]
+</code></blockquote>
+<p>
+We then want to remove the cards we have already dealt from <code>Deck</code>.
+The without function (<code>~</code>) removes the right argument from the left (e.g. <code>'abcdef'~'bce'</code> returns <code>'adf'</code>).
+We can use this function as an operand in a modified assignment to remove the <code>Hand</code> from the <code>Deck</code>.
+</p>
+<blockquote id="codeblock"><code>
+    Deck~←Hand
+</code></blockquote>
+<p>
+    I wrote this code when I had only been doing APL for a month or so.
+    It was a very interesting and educational task to undertake and I learnt a lot of new techniques.
+    Is there anything that I could have done better?
+    Are there any interesting alternatives to what I wrote?
+</p>
+<p>If you would like to find out more about the competition or the problem I have mentioned (the 2012 competition under previous years near the bottom of the page) see
+    <a href="http://www.dyalog.com/student-competition.htm" target="_blank" rel="noopener noreferrer">Dyalog’s International Problem Solving Competition</a>.
+</p>
+</div>
+    <!-- End Right Column -->
+    </div>
+  <!-- End Grid -->
+  </div>
+  <!-- End Page Container -->
+</div>
+
+<footer class="w3-container w3-teal w3-center w3-margin-top">
+  <a id="icon" href="https://github.com/samgutsell" target="_blank" rel="noopener noreferrer"><i class="fa fa-github-square"></i></a>
+  <a id="icon" href="https://www.linkedin.com/in/samgutsell/" target="_blank" rel="noopener noreferrer"><i class="fa fa-linkedin-square"></i></a>
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" rel="noopener noreferrer">w3.css</a></p>
+</footer>
+
+</body>

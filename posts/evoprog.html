@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sam Gutsell - First thoughts on evolutionary programming</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../css/main.css">
+<style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+</style>
+</head>
+<body class="w3-light-grey">
+
+<!-- Page Container -->
+<div class="w3-content w3-margin-top" style="max-width:1400px;">
+
+  <!-- The Grid -->
+  <div class="w3-row-padding">
+  
+    <!-- Left Column -->
+    <div class="w3-third">
+      <div class="w3-white w3-text-grey w3-card-4">
+        <div class="w3-container">
+        <h4><a href="../index.html"><i class="fa fa-home"></i> Home</a></h4>
+        <hr>
+        <h4><a href="../posts.html"><i class="fa fa-pencil-square-o"></i> Posts I've written</a></h4>
+        </div>
+      </div><br>
+    <!-- End Left Column -->
+    </div>
+
+    <!-- Right Column -->
+    <div class="w3-twothird">
+      <div class="w3-container w3-card w3-white w3-margin-bottom">
+<div id="post-main">
+<h1>First thoughts on evolutionary programming</h1>
+<h5>November 15, 2017</h5>
+<p>A talk at the <a href="https://www.dyalog.com/user-meetings/dyalog17.htm" target="_blank" rel="noopener noreferrer">Dyalog ’17 User Meeting</a> that I must admit wasn’t on my radar, took me by surprise and really caught my attention. The talk was from Gilgamesh Athoraya of Data Analytics AB, and it was about Evolutionary Programming.</p>
+<p>The talk was a detailed take on using artificial neural networks to enable your programs to evolve. This is all about trying to find the best code to execute intelligently, by finding the best or the best hybrid of artificial neural network scenarios.</p>
+<h3>What are the uses of Evolutionary Programming?</h3>
+<p>Evolutionary Algorithms are used to solve optimisation problems and generate artificial intelligence. The inspiration behind this type of neural network is in fact, biological evolution. The algorithm over time will attempt to learn where the ‘weak’ areas of itself are and evolve itself in an attempt to improve performance, hence the name Evolutionary.</p>
+<h3>How does it work?</h3>
+<p>When it comes to determining the best algorithm or best parts of different algorithms, we need a selection process. Like in biological evolution, it is survival of the fittest, this can be measured by using different types of selection function, some of the ones that Gilgamesh covered were: Fitness Proportionate Selection, Tournament Selection and Elitist Selection. Each has their pros and cons; ultimately the choice of selection process will probably be guided by what your end goal is.</p>
+<p>After going through the Selection process, there is a possibility that more than one algorithm has something you like in it, this is where recombination is considered. This is the process of splicing different genetic algorithms together to create a child algorithm from 2 (or more) parent algorithms.</p>
+<p>The process of building, selecting and recombining can continue from this until an endpoint/goal is reached.</p>
+<p>A simplified overview of the cycle is:</p>
+<ul>
+<li>New generation</li>
+<li>Fitness Selection</li>
+<li>Terminate ‘unfit’ algorithms</li>
+<li>Recombine to make the next generation</li>
+<li>Repeat</li>
+</ul>
+<h3>Closing thoughts</h3>
+<p>After Gilgamesh’s talk I feel like I learnt a lot about the fundamental process of Evolutionary Programming. Gilgamesh used a lot of biological terminology which I felt made it easier to follow and understand. It was detailed but easy to follow and I would thoroughly recommend watching this if you didn’t have a chance to catch it at the Dyalog ’17 User Meeting. The full presentation is below, Courtesy of <a href="https://www.dyalog.com/" target="_blank" rel="noopener noreferrer">Dyalog.</a></p>
+<p><a href="https://www.youtube.com/watch?v=Wff2InJn3p0&ab_channel=DyalogUserMeetings" target="_blank" rel="noopener noreferrer">Gil's talk on Dyalog's YouTube Channel</a></p>
+
+</div>
+    <!-- End Right Column -->
+    </div>
+  <!-- End Grid -->
+  </div>
+  <!-- End Page Container -->
+</div>
+
+<footer class="w3-container w3-teal w3-center w3-margin-top">
+  <a id="icon" href="https://github.com/samgutsell" target="_blank" rel="noopener noreferrer"><i class="fa fa-github-square"></i></a>
+  <a id="icon" href="https://www.linkedin.com/in/samgutsell/" target="_blank" rel="noopener noreferrer"><i class="fa fa-linkedin-square"></i></a>
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" rel="noopener noreferrer">w3.css</a></p>
+</footer>
+
+</body>

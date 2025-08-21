@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sam Gutsell - Using Booleans (with some Dyalog APL examples)</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../css/main.css">
+<style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+</style>
+</head>
+<body class="w3-light-grey">
+
+<!-- Page Container -->
+<div class="w3-content w3-margin-top" style="max-width:1400px;">
+
+  <!-- The Grid -->
+  <div class="w3-row-padding">
+  
+    <!-- Left Column -->
+    <div class="w3-third">
+      <div class="w3-white w3-text-grey w3-card-4">
+        <div class="w3-container">
+        <h4><a href="../index.html"><i class="fa fa-home"></i> Home</a></h4>
+        <hr>
+        <h4><a href="../posts.html"><i class="fa fa-pencil-square-o"></i> Posts I've written</a></h4>
+        </div>
+      </div><br>
+    <!-- End Left Column -->
+    </div>
+
+    <!-- Right Column -->
+    <div class="w3-twothird">
+      <div class="w3-container w3-card w3-white w3-margin-bottom">
+<div id="post-main">
+<h1>Using Booleans (with some Dyalog APL examples)</h1>
+<h5>August 13, 2020</h5>
+
+<p>Booleans are one of the most prominent data types used throughout computing. In programming, Booleans are mainly used in logic problems and can be used and manipulated in many ways.</p>
+<h3>What is a Boolean?</h3>
+<p>A Boolean is a data type used to identify a value which can only be true or false, sometimes represented as 1 or 0, respectively. The Boolean data type is named after George Boole, an English mathematician and logician. Boole’s work on algebraic and logical systems is the basis of all modern computer systems.</p>
+<p>So now we know what a Boolean is, how are they used in everyday life?</p>
+<h3>Real world use cases</h3>
+<p>Before we start looking at code examples, I wanted to demonstrate how Boolean logic is applied in everyday life, so let’s look at a couple of examples.</p>
+<p><b><i>Example 1:</i></b> On a most electronic household devices you would use a switch/button to control the on/off state of the device, this state is representative of a Boolean value as the device can only be on or off (True or false, 1 or 0).</p>
+<p><b><i>Example 2:</i></b> I’m about to make a cup of tea and I check to see if there is water in the kettle, this is either true or false. Let’s say there is no water in the kettle, then I should fill it up. This is an example of Boolean logic, I’m deciding to carry out an action based on something being either true or false.</p>
+<p>So how do we evaluate these values in APL?</p>
+<h3>Writing Boolean logic and evaluations</h3>
+<p>Taking a simple true or false like in example 2 above, we can use this to write an instruction based on this Boolean value:</p>
+<blockquote id="codeblock"><code>
+If the kettle is empty
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Fill it up
+</blockquote></code>
+
+<p>This is a fairly simple evaluation, and is easy to mimic in APL:</p>
+
+<blockquote id="codeblock"><code>
+:If IsKettleEmpty
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;FillKettle
+<br>
+:EndIf
+</blockquote></code>
+
+<p>Where IsKettleEmpty is a Boolean variable indicating if the kettle is empty and FillKettle is a method to fill the kettle.</p>
+<p>We can also evaluate multiple conditions at the same time using logical operators, which even though it may sound robotic, it is also something we all do on a regular basis. For example, when deciding to leave the house, I can’t do so unless I have shoes on and the door is unlocked. This is using two Boolean values to determine when an action can be carried out.</p>
+<p>A slightly less simple evaluation but still not too difficult, let’s write an instruction:</p>
+<blockquote id="codeblock"><code>
+If the door is unlocked and my shoes are on
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Leave the house
+</blockquote></code>
+
+<p>Again, let’s mimic this in APL:</p>
+<blockquote id="codeblock"><code>
+:If DoorUnlocked∧ShoesOn
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;LeaveHouse
+<br>
+:EndIf
+</blockquote></code>
+
+<p>Where DoorUnlocked is a Boolean variable indicating if the door is unlocked, ShoesOn is a Boolean variable that indicates if my shoes are on, and LeaveHouse is a method for me to leave the house.</p>
+
+<p>You will have noticed that there is a symbol (<code>∧</code>) in the above APL code, this symbol represents an <b><i>“and”</i></b>, so when we say “the door is unlocked <b><i>and</i></b> my shoes are on” the <b><i>“and”</i></b> is a logical operator. This allows us to combine two Booleans so we can meet specific circumstances before we carry out an action.</p>
+
+<h3>Logical operators</h3>
+<p>We have seen an example of the logical operator <b><i>“and”</i></b> (<code>∧</code>) however, there are some others. We also have <b><i>“or”</i></b> and <b><i>“not”</i></b>, these allow us to better specify other circumstances. When applying a <b><i>“not”</i></b> to a Boolean value it is effectively working the same way it does in English, if you say it is not raining then you are indicating that the state of raining is currently false, if a value is 0 and we apply a <b><i>“not”</i></b> then it would return a 1. The way we represent <b><i>“not”</i></b> in APL is by using <code>~</code>, this means that if we wanted to represent <b><i>“not”</i></b> raining in APL the same way we have in English, we can write:</p>
+<blockquote id="codeblock"><code>
+~Raining
+</blockquote></code>
+
+<p>Unlike the <b><i>“not”</i></b> logical operator, <b><i>“or”</i></b> does not work the same as it does in English, this is because we use the word <b><i>“or”</i></b> to offer up a choice like chocolate or strawberry, however, in computing we use it to say if one of these values is true then the whole statement is true. Let’s say I’m looking to purchase a car and I’m only interested in red <b><i>“or”</i></b> blue cars. We would need to apply a filter to all the cars on offer, this will then evaluate each car’s colour and only show me the red <b><i>“or”</i></b> blue ones.</p>
+
+<p>The instruction would look like this:</p>
+<blockquote id="codeblock"><code>
+If the car’s colour is blue or red
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Show the car
+</blockquote></code>
+<p>Let's write that in APL:</p>
+<blockquote id="codeblock"><code>
+:If (CarColour≡’Red’)∨CarColour≡’Blue’
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ShowCar
+<br>
+:EndIf
+</blockquote></code>
+<p>Where CarColour is the text value of the colour of the car i.e ‘Red’, and ShowCar is a method to show me the car.</p>
+<p>You may have noticed we are using two symbols here, one is for evaluation purposes and the other is the symbol for <b><i>“or”</i></b>. The symbol for <b><i>“or”</i></b> is <code>∨</code>, however, the other symbol (<code>≡</code>), is <b><i>“match”</i></b>, this allows to check if CarColour is either ‘Red’ <b><i>“or”</i></b> ‘Blue’, the result of CarColour <b><i>“match”</i></b> ‘Red’ will either be 1 or 0 (True or False). Now, it must be said that there are easier ways to write this in APL, but I have written it this way to make it easier to demonstrate.</p>
+
+<h3>Truth tables</h3>
+<p>When dealing with Boolean logic it can become quite complex at times, with multiple conditions and evaluations in the same expression. One method of attempting to understand, and sometimes simplify Boolean logic is the use of truth tables. These allow you to map out and visualise the logic being used, let’s use one of our examples to demonstrate.</p>
+<p>Let’s use my condition for when I can leave the house, which was DoorUnlocked <b><i>“and”</i></b> ShoesOn. The way we would represent this in a truth table is by listing out all possible combined states for our variables, using a column for each individual variable and a column for the result of the full expression. Normally, the column headers for the variables would just be represented by letters, however, I have included the names for clarity.</p>
+
+<table>
+<tr>
+  <th>A (DoorUnlocked)</th>
+  <th>B (ShoesOn)</th>
+  <th>A∧B</th>
+</tr>
+<tr>
+  <td>0</td>
+  <td>0</td>
+  <td>0</td>
+</tr>
+<tr>
+  <td>0</td>
+  <td>1</td>
+  <td>0</td>
+</tr>
+<tr>
+  <td>1</td>
+  <td>0</td>
+  <td>0</td>
+</tr>
+<tr>
+  <td>1</td>
+  <td>1</td>
+  <td>1</td>
+</tr>
+</table>
+
+<p>As you can see in the third column, the whole expression is only true when both A <b><i>“and”</i></b> B are true.</p>
+
+<p>If we take this structure and use an <b><i>“or”</i></b> instead, the truth table for <b><i>“or”</i></b> looks like this:</p>
+
+<table>
+<tr>
+  <th>A</th>
+  <th>B</th>
+  <th>A∨B</th>
+</tr>
+<tr>
+  <td>0</td>
+  <td>0</td>
+  <td>0</td>
+</tr>
+<tr>
+  <td>0</td>
+  <td>1</td>
+  <td>1</td>
+</tr>
+<tr>
+  <td>1</td>
+  <td>0</td>
+  <td>1</td>
+</tr>
+<tr>
+  <td>1</td>
+  <td>1</td>
+  <td>1</td>
+</tr>
+</table>
+
+<p>Now, if we add another logical operator to this expression, in <b><i>“not”</i></b> (<code>~</code>), and apply it to B, the truth table would look like this:</p>
+
+<table>
+<tr>
+  <th>A</th>
+  <th>B</th>
+  <th>~B</th>
+  <th>A∨~B</th>
+</tr>
+<tr>
+  <td>0</td>
+  <td>0</td>
+  <td>1</td>
+  <td>1</td>
+</tr>
+<tr>
+  <td>0</td>
+  <td>1</td>
+  <td>0</td>
+  <td>0</td>
+</tr>
+<tr>
+  <td>1</td>
+  <td>0</td>
+  <td>1</td>
+  <td>1</td>
+</tr>
+<tr>
+  <td>1</td>
+  <td>1</td>
+  <td>0</td>
+  <td>1</td>
+</tr>
+</table>
+
+<p>You will have noticed that I added a column for <code>~B</code>, adding columns for parts of the expression is something that is sometimes done to try and break the expression down into more manageable parts.</p>
+<h3>What real world examples can you find?</h3>
+<p>There is lot more to learn about Booleans, a lot more than I have covered. So, if this has piqued your interest, I’d suggest going out and trying to learn more about Booleans. I’d really like to hear about any other real world examples you can think of or can find, so please leave a comment if you have any.</p>
+
+
+
+</div>
+    <!-- End Right Column -->
+    </div>
+  <!-- End Grid -->
+  </div>
+  <!-- End Page Container -->
+</div>
+
+<footer class="w3-container w3-teal w3-center w3-margin-top">
+  <a id="icon" href="https://github.com/samgutsell" target="_blank" rel="noopener noreferrer"><i class="fa fa-github-square"></i></a>
+  <a id="icon" href="https://www.linkedin.com/in/samgutsell/" target="_blank" rel="noopener noreferrer"><i class="fa fa-linkedin-square"></i></a>
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" rel="noopener noreferrer">w3.css</a></p>
+</footer>
+
+</body>

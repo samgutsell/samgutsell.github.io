@@ -1,0 +1,52 @@
+#post-main{
+    margin: 5%;
+}
+
+#icon {
+    font-size: xx-large;
+    }
+
+a {
+    color: #288d85;
+}
+
+a:hover {
+    color: #288d85;
+    font-weight: 600;
+}
+
+#codeblock,code{
+    background-color: #288d85;
+    color: #E1BE6A;
+    font-weight: 900;
+}
+
+#block-highlight{
+    background-color: #dddde0;
+}
+
+table {
+  width: 100%;
+  table-layout : fixed;
+  text-align: center;
+}
+
+th {
+  background-color: #288d85;
+  color: white;
+}
+
+tr:nth-child(even){background-color: #f2f2f2;}
+
+tr:hover {background-color: #ddd;}
+
+img {
+  height: auto;
+  width: 100%;
+}
+
+footer{
+    a {
+        color:#fff  !important;
+    }
+}

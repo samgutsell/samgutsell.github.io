@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Sam Gutsell - Home</title>
+<title>Sam Gutsell - {post title}</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="./css/main.css">
+<link rel="stylesheet" href="../css/main.css">
 <style>
 html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 </style>
@@ -23,39 +23,29 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     <!-- Left Column -->
     <div class="w3-third">
       <div class="w3-white w3-text-grey w3-card-4">
-        <div class="w3-display-container">
-          <img src="./images/avatar.png" style="width:100%" alt="Avatar">
-          <div class="w3-display-bottomleft w3-container w3-text-black">
-            <h2>Sam Gutsell</h2>
-          </div>
-        </div>
-        <!--
         <div class="w3-container">
-          <h4><a href="./posts.html"><i class="fa fa-pencil-square-o"></i> Posts I've written</a></h4>
-          <hr>
+        <h4><a href="../index.html"><i class="fa fa-home"></i> Home</a></h4>
+        <hr>
+        <h4><a href="../posts.html"><i class="fa fa-pencil-square-o"></i> Posts I've written</a></h4>
         </div>
-        -->
       </div><br>
     <!-- End Left Column -->
     </div>
-    
 
     <!-- Right Column -->
-    <div class="w3-twothird">    
+    <div class="w3-twothird">
       <div class="w3-container w3-card w3-white w3-margin-bottom">
-        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Welcome to my portfolio</h2>
-        <p>Hi, and thanks for stopping by! This portfolio is a snapshot of my journey — the projects I’ve loved working on, the skills I’ve developed, and the ideas I’ve brought to life. I hope it gives you a feel for my style, passions, and what I can bring to the table.</p>
-        <div id="post-main">
-          <h4><a href="./posts.html"><i class="fa fa-pencil-square-o"></i> Posts I've written</a></h4>
-          <h4><a href=""><i class="fa fa-folder-open"></i> Projects</a></h4>
-          <hr>
-        </div>
+<div id="post-main">
+<h1>{post title}</h1>
+<h5>{date}</h5>
+<p>{text}</p>
+<h3>{header}</h3>
+<p>{text} <code>{code}</code>{text}</p>
+</div>
     <!-- End Right Column -->
     </div>
-    
   <!-- End Grid -->
   </div>
-  
   <!-- End Page Container -->
 </div>
 
@@ -66,4 +56,3 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 </footer>
 
 </body>
-</html>
